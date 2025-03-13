@@ -1,0 +1,62 @@
+{% extends "Core/layouts/main.html" %}
+{% block title %}Serach {% endblock title%}
+
+{% block content %}
+
+<!-- --------navbar---------------- -->
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light  fixed-top">
+    <div class="container">
+        <a href="{% url 'home' %}"
+            class="navbar-brand text-warning">
+            <h4>{% if district %}{{ district.name }}{% else %} {{district.name}} {% endif %}</h4>
+        </a>
+        <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav center"
+                style="margin-left: 30%;">
+                <li class="nav-item"><a href="{% url 'home' %}"
+                        class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#"
+                        class="nav-link">About</a></li>
+                <li class="nav-item"><a
+                        href="#"
+                        class="nav-link">Explore</a></li>
+                <li class="nav-item"><a
+                        href="#"
+                        class="nav-link">Contact</a></li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item"><a href="#"
+                        class="nav-link"><img src="{% static 'images/signin.jpeg' %}" class="img-fluid" style="width: 25px; border-radius: 15px; height: 25px; margin-right: 10px;" ></img>{{request.user}}</a></li>
+                <li class="nav-item ml-2" ><a
+                        href="{% url 'signout' %}"
+                        class="nav-link"><button class="btn btn-warning" style="font-size: 12px" >LOGOUT</button></i>
+                    </a></li>
+                {% else %}
+                <li class="nav-item"><a
+                        href="{% url 'signup' %}"
+                        class="nav-link"><button class="btn btn-warning">SIGNUP</button></a></li>
+                <li class="nav-item" style="width: 30px;"><a
+                        href="{% url 'signin' %}"
+                        class="nav-link"><button class="btn btn-warning">SINGIN</button></a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+{% for booking in user.bookings.all %}
+    <p>Booking: {{ booking.place }} - Status: {{ booking.get_status_display }}</p>
+{% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+.center li a {
+    margin-right: 20px;
+    color: black;
+
+}
+
+.navbar-nav li a:hover {
+    color: rgb(43, 63, 4);
+}
+
+.icon {
+    padding: 2px;
+    margin-left: 10px;
+    color: black;
+
+}

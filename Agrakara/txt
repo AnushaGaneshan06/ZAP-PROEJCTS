@@ -1,0 +1,29 @@
+python manage.py shell
+
+
+
+from Core.models import District
+
+# Delete all existing districts (optional)
+District.objects.all().delete()
+
+# New updated list of districts
+districts = [
+    "Ariyalur", "Chengalpattu", "Chennai", "Coimbatore", "Cuddalore",
+    "Dharmapuri", "Dindigul", "Erode", "Kallakurichi", "Kanchipuram",
+    "Kanyakumari", "Karur", "Krishnagiri", "Madurai", "Mayiladuthurai",
+    "Nagapattinam", "Namakkal", "Nilgiris", "Perambalur", "Pudukkottai",
+    "Ramanathapuram", "Ranipet", "Salem", "Sivaganga", "Tenkasi",
+    "Thanjavur", "Theni", "Thoothukudi", "Tiruchirappalli", "Tirunelveli",
+    "Tirupathur", "Tiruppur", "Tiruvallur", "Tiruvannamalai", "Tiruvarur",
+    "Vellore", "Viluppuram", "Virudhunagar"
+]
+
+# Add the districts to the database
+for district in districts:
+    District.objects.get_or_create(name=district)
+
+print("✅ Tamil Nadu districts updated successfully!")
+
+
+District.objects.all()

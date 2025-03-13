@@ -1,0 +1,73 @@
+{% extends "Core/layouts/main.html" %}
+{% load static %}
+
+{% block title %}Home page{% endblock title %}
+
+{% block content %}
+{% include "Core/inc/navbar.html" %}
+<!-- ---------------------  -->
+
+<div class="container text-center "
+    style="margin-top: 10%">
+    <div class="row">
+        <div class="col-6">
+            <img src="{% static 'images/banner.jpeg' %}"
+                class="img-fluid banner"
+                alt="banner">
+        </div>
+        <div class="col-6 mt-4 p-2 ">
+
+            <h3 class="text-warning fw-bold">Welcome to Agrakara</h3>
+            <!-- ----------------------------------------- -->
+            <form action="{% url 'search_districts' %}" method="GET">
+                <div class="input-container mt-4">
+                    <input type="text" name="query"
+                        placeholder="            Search districts..." required>
+                    <i class="fa fa-search"></i>
+                </div>
+                <button type="submit"
+                    style="border: none; background-color: white;"></button>
+            </form>
+            <!-- ----------------------------------- -->
+            <p>
+                The temple stands as a beacon of peace, nestled in timeless
+                serenity.<br> Its ancient walls, rich with history, whisper
+                stories
+                of devotion and grace. Within its embrace, hearts find solace,
+                and spirits are uplifted in quiet reflection.
+            </p>
+            <a href="#" class="btn btn-success mt-2">Explore</a>
+        </div>
+    </div>
+</div>
+<style>
+    input{
+        border: 1px solid gray;
+        width: 380px;
+        border-radius: 10px;
+        height: 50px;
+        outline: none;
+        
+    }
+    .input-container {
+            position: relative;
+        } 
+
+
+        .input-container i {
+            position: absolute;
+            right: 80%;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            pointer-events: none;
+        } 
+
+    .input-container input {
+        padding-left: 40px; 
+        font-size: 16px;
+    }
+
+
+</style>
+{% endblock content %}
