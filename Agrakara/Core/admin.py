@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Temple
+from .models import Temple, Booking
 
 class TempleAdmin(admin.ModelAdmin):
     list_display = ('name', 'district', 'contact_number', 'created_at')
@@ -8,6 +8,8 @@ class TempleAdmin(admin.ModelAdmin):
     list_filter = ('district',)
 
 admin.site.register(Temple, TempleAdmin)
+admin.site.register(Booking)
+
 
 
 

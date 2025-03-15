@@ -47,7 +47,8 @@
                     </p>
                     <a href="{{ temple.google_maps_link }}" target="_blank"
                         class="btn btn-primary">View on Google Maps</a>
-                </div>
+                    <a href="{% url 'book_temple' temple.id %}"
+                        class="btn btn-success">Register</a> </div>
             </div>
         </div>
         {% empty %}

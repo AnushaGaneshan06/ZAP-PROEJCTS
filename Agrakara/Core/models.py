@@ -27,6 +27,18 @@ class Temple(models.Model):
     
 
 
+# -----------------
+
+class Booking(models.Model):
+    temple = models.ForeignKey(Temple, on_delete=models.CASCADE, related_name='bookings')
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    date = models.DateField()
+    purpose = models.TextField()
+
+    def __str__(self):
+        return f"Booking for {self.temple.name} by {self.name} on {self.date}"
 
 
 

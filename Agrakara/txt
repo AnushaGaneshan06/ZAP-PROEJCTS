@@ -1,7 +1,5 @@
 python manage.py shell
 
-
-
 from Core.models import District
 
 # Delete all existing districts (optional)
@@ -9,21 +7,214 @@ District.objects.all().delete()
 
 # New updated list of districts
 districts = [
-    "Ariyalur", "Chengalpattu", "Chennai", "Coimbatore", "Cuddalore",
-    "Dharmapuri", "Dindigul", "Erode", "Kallakurichi", "Kanchipuram",
-    "Kanyakumari", "Karur", "Krishnagiri", "Madurai", "Mayiladuthurai",
-    "Nagapattinam", "Namakkal", "Nilgiris", "Perambalur", "Pudukkottai",
-    "Ramanathapuram", "Ranipet", "Salem", "Sivaganga", "Tenkasi",
-    "Thanjavur", "Theni", "Thoothukudi", "Tiruchirappalli", "Tirunelveli",
-    "Tirupathur", "Tiruppur", "Tiruvallur", "Tiruvannamalai", "Tiruvarur",
-    "Vellore", "Viluppuram", "Virudhunagar"
+"Ariyalur", "Chengalpattu", "Chennai", "Coimbatore", "Cuddalore",
+"Dharmapuri", "Dindigul", "Erode", "Kallakurichi", "Kanchipuram",
+"Kanyakumari", "Karur", "Krishnagiri", "Madurai", "Mayiladuthurai",
+"Nagapattinam", "Namakkal", "Nilgiris", "Perambalur", "Pudukkottai",
+"Ramanathapuram", "Ranipet", "Salem", "Sivaganga", "Tenkasi",
+"Thanjavur", "Theni", "Thoothukudi", "Tiruchirappalli", "Tirunelveli",
+"Tirupathur", "Tiruppur", "Tiruvallur", "Tiruvannamalai", "Tiruvarur",
+"Vellore", "Viluppuram", "Virudhunagar"
 ]
 
 # Add the districts to the database
 for district in districts:
-    District.objects.get_or_create(name=district)
+District.objects.get_or_create(name=district)
 
 print("✅ Tamil Nadu districts updated successfully!")
 
-
 District.objects.all()
+
+{% extends "Core/layouts/main.html" %}
+{% load static %}
+{% block title %}SIGN IN PAGE {% endblock title%}
+{% block content %}
+<!-- ----------------form ------------------  -->
+<div class="conatiner " style="margin-top: 10%;">
+    {% include "Core/inc/message.html" %}
+    <!-- ----------  -->
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <img src="{% static 'images/signin.jpeg' %}"
+                class="img-fluid banner"
+                alt="banner">
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-lg">
+                <div class="card-header text-center">
+                    <h1 class="mt-3">Sign In</h1>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mt-4">
+                            {{ form.username.label_tags }}
+                            {{ form.username }}
+                        </div>
+                        <div class="mt-4">
+                            {{ form.pass1.label_tags }}
+                            {{ form.pass1 }}
+                        </div>
+                        <button type="submit"
+                            class="btn btn-primary w-100 mb-4 mt-4">Sign
+                            In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -------------------------------------------- -->
+{% endblock content %}
+--
+{% extends "Core/layouts/main.html" %}
+{% load static %}
+{% block title %}SIGNUP PAGE {% endblock title %}
+{% block content %}
+
+<!-- -----------form ---------------- -->
+<div class="container-fluid" style="margin-top: 5%;">
+
+    <div class="row justify-content-center">
+        <!-- --------------  -->
+        <div class="col-6">
+            <img src="{% static 'images/signup.jpg' %}" alt='signup'
+                class="img-fluid banner">
+        </div>
+        <!-- -------------  -->
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header ">
+                    <h1 class="mt-3 text-center">Sign Up</h1>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <!-- {{ form.as_p }} -->
+                        <div class="mb-3">
+                            {{ form.username.label_tags }}
+                            {{ form.username }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.fname.label_tags }}
+                            {{ form.fname }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.lname.label_tags }}
+                            {{ form.lname }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.email.label_tags }}
+                            {{ form.email }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.pass1.label_tags }}
+                            {{ form.pass1 }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.pass2.label_tags }}
+                            {{ form.pass2 }}
+                        </div>
+
+                        <button type="submit"
+                            class="btn btn-primary w-100  mt-2 mb-2">Sign
+                            Up</button>
+                        <p>You are already User ? <a
+                                href="{% url 'signin' %}"
+                                class="text-decoration-none">LogIn</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ------------form---------------- -->
+
+{% endblock content %}
+
+{% extends 'Core/layouts/main.html' %}
+{% load static %}
+{% block title %}Temple{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Temples</h2>
+    <div class="row">
+        <!-- Search and District Filter Form -->
+        <div class="col-md-6">
+            <form method="get" class="form-inline">
+                <input type="text" name="search" class="form-control mr-2"
+                    placeholder="Search Temple" value="{{ search_query }}">
+                <select name="district" class="form-control">
+                    <option value>Select District</option>
+                    {% for dist in districts %}
+                    <option value="{{dist}}"
+                        {% if district == dist %}selected{% endif %}>
+                        {{ dist }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit"
+                    class="btn btn-primary ml-2">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        {% for temple in page_obj %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if temple.main_image %}
+                <img src="{{ temple.main_image.url }}" class="card-img-top"
+                    alt="{{ temple.name }}">
+                {% else %}
+                <img src="https://via.placeholder.com/400x300"
+                    class="card-img-top" alt="Temple Image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ temple.name }}</h5>
+                    <p class="card-text">
+                        <strong>District:</strong> {{ temple.district }} <br>
+                        <strong>Contact:</strong> {{ temple.contact_number }}
+                        <br>
+                        <strong>Timings:</strong> {{ temple.pooja_timings }}
+                        <br>
+                    </p>
+                    <a href="{{ temple.google_maps_link }}" target="_blank"
+                        class="btn btn-primary">View on Google Maps</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center mt-3">No temples found.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page=1&district={{ district }}&search={{ search_query }}">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ page_obj.previous_page_number }}&district={{ district }}&search={{ search_query }}">Previous</a>
+                </li>
+                {% endif %}
+                <li class="page-item disabled">
+                    <span class="page-link">{{ page_obj.number }} of
+                        {{ page_obj.paginator.num_pages }}</span>
+                </li>
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ page_obj.next_page_number }}&district={{ district }}&search={{ search_query }}">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{page_obj.paginator.num_pages}}&district={{ district }}&search={{ search_query }}">Last</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

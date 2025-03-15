@@ -1,0 +1,12 @@
+{% extends 'Core/layouts/main.html' %}
+
+{% block title %}Booking Successful{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Booking Successful</h2>
+    <p>Your booking has been successfully made. We will contact you soon.</p>
+    <a href="{% url 'temple_list' %}" class="btn btn-primary">Back to Temple
+        List</a>
+</div>
+{% endblock %}

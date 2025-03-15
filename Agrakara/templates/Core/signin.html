@@ -1,39 +1,75 @@
 {% extends "Core/layouts/main.html" %}
 {% load static %}
-{% block title %}SIGN IN PAGE {% endblock title%}
+{% block title %}SIGN IN PAGE{% endblock title%}
 {% block content %}
-<!-- ----------------form ------------------  -->
-<div class="conatiner " style="margin-top: 10%;">
-    {% include "Core/inc/message.html" %}
-    <!-- ----------  -->
-    <div class="row justify-content-center">
-        <div class="col-6">
-            <img src="{% static 'images/signin.jpeg' %}"
-                class="img-fluid banner"
-                alt="banner">
+
+<!-- Background with Divine Theme -->
+{% include "Core/inc/message.html" %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-6 d-flex justify-content-center mt-5">
+            <h3
+                style="color: #d4af37; font-weight: bold; text-shadow: 1px 1px rgba(43, 35, 1, 0.347);">
+                Agrakara Welcome's You
+            </h3>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow-lg">
+    </div>
+</div>
+
+<div class="container"
+    style="margin-top: 2%; padding: 2rem; border-radius: 10px;">
+    <div class="row justify-content-center align-items-center">
+        <!-- Image Section -->
+        <div class="col-lg-6 col-md-6 d-none d-md-block text-center">
+            <img src="{% static 'images/signin.jpg' %}"
+                class="img-fluid banner"
+                style="max-width: 100%; height: auto; border-radius: 10px;"
+                alt="Sign In Banner">
+        </div>
+
+        <!-- Sign-in Form Section -->
+        <div class="col-lg-6 col-md-6 col-sm-8 col-10">
+            <div class="card shadow-lg"
+                style="border: 2px solid #393103c1;">
                 <div class="card-header text-center">
-                    <h1 class="mt-3">Sign In</h1>
+                    <h1 class="mt-3"
+                        style="font-family: 'Poppins', sans-serif; color: #8B4513;">ॐ
+                        Sign In</h1>
+                    <p
+                        style="font-size: 14px; color: #6D4C41;">"யோகம்: கர்மசு கௌசலம்"
+                        - Excellence in action is Yoga</p>
+                </div>
+
+                <div class="card-body">
                     <form method="POST">
                         {% csrf_token %}
-                        <div class="mt-4">
-                            {{ form.username.label_tags }}
+                        <div class="mb-3">
+                            <label
+                                style="color: #6D4C41; font-weight: bold;">🔱
+                                Username</label>
                             {{ form.username }}
                         </div>
-                        <div class="mt-4">
-                            {{ form.pass1.label_tags }}
+                        <div class="mb-3">
+                            <label
+                                style="color: #6D4C41; font-weight: bold;">🔒
+                                Password</label>
                             {{ form.pass1 }}
                         </div>
-                        <button type="submit"
-                            class="btn btn-primary w-100 mb-4 mt-4">Sign
+                        <button type="submit" class="btn w-100"
+                            style="background-color: #d4af37; color: white; font-weight: bold; border-radius: 5px;">Sign
                             In</button>
                     </form>
+                </div>
+                <div class="container">
+                    <p>Are You the new User ? <a
+                            href="{% url 'signup' %}"
+                            class="text-decoration-none"
+                            style="color: #6D4C41;">SignUp</a></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- -------------------------------------------- -->
+
 {% endblock content %}

@@ -23,6 +23,7 @@ from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('grappelli/', include('grappelli.urls')),
     path("", include("Core.urls")),
     
 ]

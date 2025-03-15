@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpForm, SignInForm, SearchForm
 from . models import *
 from django.core.paginator import Paginator
+from .forms import BookingForm  # Assuming you have a form for bookings
+
 
 
 def home(request):
@@ -93,12 +95,8 @@ def search_districts(request):
 
 
 
+
 # ----------------------------------------MODELS---------------------------------
-
-
-# def temples_by_district(request, district):
-#     temples = Temple.objects.filter(district=district)
-#     return render(request, 'temples_list.html', {'temples': temples, 'district': district})
 
 
 def temple_list(request):
@@ -124,3 +122,38 @@ def temple_list(request):
         'district': district,
         'districts': districts
     })
+
+
+# -------------------- 
+
+
+
+def book_temple(request, temple_id):
+    temple = get_object_or_404(Temple, id=temple_id)
+    
+    if request.method == 'POST':
+        # Handling the booking form submission
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        date = request.POST.get('date')
+        purpose = request.POST.get('purpose')
+        
+        # Create the booking object
+        booking = Booking.objects.create(
+            temple=temple,
+            name=name,
+            email=email,
+            phone=phone,
+            date=date,
+            purpose=purpose
+        )
+        
+        # Redirect to the booking success page
+        return redirect('booking_success')  # Ensure this matches the name in URLs
+    
+    return render(request, 'Core/models/book_temple.html', {'temple': temple})
+
+
+def booking_success(request):
+    return render(request, "Core/models/book_success.html")

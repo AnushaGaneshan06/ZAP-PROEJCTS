@@ -1,0 +1,33 @@
+{% extends 'Core/layouts/main.html' %}
+
+{% block title %}Book {{ temple.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Book {{ temple.name }}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" class="form-control" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="date">Booking Date</label>
+            <input type="date" class="form-control" name="date" required>
+        </div>
+        <div class="form-group">
+            <label for="purpose">Purpose of Booking</label>
+            <textarea class="form-control" name="purpose" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+{% endblock %}

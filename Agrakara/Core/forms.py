@@ -2,6 +2,9 @@
 
 from django import forms
 from django.contrib.auth.models import User
+from .models import Booking  
+
+
 
 class SignUpForm(forms.Form):
     username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class' :'form-control', 'placeholder' : 'username'}) )
@@ -28,6 +31,24 @@ class SignUpForm(forms.Form):
 class SignInForm(forms.Form):
     username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'UserName'}))
     pass1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder': 'Password'}))
+
+
+# --------------------------- 
+
+
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['name', 'email', 'phone', 'date', 'purpose']
+
+
+
+
+
+
+
+
+
 
 
 

@@ -11,8 +11,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav center"
-                style="margin-left: 30%;">
+            <ul class="navbar-nav center d-flex justify-content-center ms-auto">
                 <li class="nav-item"><a href="{% url 'home' %}"
                         class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="#"
@@ -28,25 +27,20 @@
             <ul class="navbar-nav ms-auto">
                 {% if request.user.is_authenticated %}
                 <li class="nav-item"><a href="#"
-                        class="nav-link"><img src="{% static 'images/signin.jpeg' %}" class="img-fluid" style="width: 25px; border-radius: 15px; height: 25px; margin-right: 10px;" ></img>{{request.user}}</a></li>
+                        class="nav-link"><img src="{% static 'images/signin.jpg' %}" class="img-fluid" style="width: 25px; border-radius: 15px; height: 25px; margin-right: 10px;" ></img>{{request.user}}</a></li>
                 <li class="nav-item ml-2" ><a
                         href="{% url 'signout' %}"
-                        class="nav-link"><button class="btn btn-warning" style="font-size: 12px" >LOGOUT</button></i>
+                        class="nav-link"><button class="btn btn-warning" style="font-size: 12px;" >LOGOUT</button></i>
                     </a></li>
                 {% else %}
                 <li class="nav-item"><a
                         href="{% url 'signup' %}"
-                        class="nav-link"><button class="btn btn-warning">SIGNUP</button></a></li>
-                <li class="nav-item" style="width: 30px;"><a
+                        class="nav-link"><button class="btn btn-warning" style="font-size: 12px;">SIGNUP</button></a></li>
+                <li class="nav-item" style="width: 30px; "><a
                         href="{% url 'signin' %}"
-                        class="nav-link"><button class="btn btn-warning">SINGIN</button></a></li>
+                        class="nav-link"><button class="btn btn-warning" style="font-size: 12px;">SINGIN</button></a></li>
                 {% endif %}
-                <!-- <li class="nav-item">
-                    <a class="nav-link"
-                        href="#"><i
-                            class="fa fa-heart icon"
-                            title="fav"></i></a>
-                </li> -->
+
             </ul>
         </div>
     </div>

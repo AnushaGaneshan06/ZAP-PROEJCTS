@@ -1,3 +1,16 @@
+/* h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+.nav-link {
+    font-family: 'Poppins', sans-serif;
+} */
+
 .center li a {
     margin-right: 20px;
     color: black;
